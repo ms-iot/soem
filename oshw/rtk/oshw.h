@@ -1,24 +1,9 @@
-/******************************************************************************
- *                *          ***                    ***
- *              ***          ***                    ***
- * ***  ****  **********     ***        *****       ***  ****          *****
- * *********  **********     ***      *********     ************     *********
- * ****         ***          ***              ***   ***       ****   ***
- * ***          ***  ******  ***      ***********   ***        ****   *****
- * ***          ***  ******  ***    *************   ***        ****      *****
- * ***          ****         ****   ***       ***   ***       ****          ***
- * ***           *******      ***** **************  *************    *********
- * ***             *****        ***   *******   **  **  ******         *****
- *                           t h e  r e a l t i m e  t a r g e t  e x p e r t s
- *
- * http://www.rt-labs.com
- * Copyright (C) 2009. rt-labs AB, Sweden. All rights reserved.
- *------------------------------------------------------------------------------
- * $Id: oshw.h 452 2013-02-26 21:02:58Z smf.arthur $
- *------------------------------------------------------------------------------
+/*
+ * Licensed under the GNU General Public License version 2 with exceptions. See
+ * LICENSE file in the project root for full license information
  */
 
-/** \file 
+/** \file
  * \brief
  * Headerfile for oshw.c
  */
@@ -26,6 +11,10 @@
 #ifndef _oshw_
 #define _oshw_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 #include <kern.h>
 #include "ethercattype.h"
@@ -33,10 +22,14 @@
 #include "ethercatmain.h"
 
 
-uint16 oshw_htons(uint16 hostshort);
-uint16 oshw_ntohs(uint16 networkshort);
+uint16 oshw_htons(uint16 host);
+uint16 oshw_ntohs(uint16 network);
 
 ec_adaptert * oshw_find_adapters(void);
 void oshw_free_adapters(ec_adaptert * adapter);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

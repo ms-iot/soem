@@ -1,21 +1,6 @@
-/******************************************************************************
- *                *          ***                    ***
- *              ***          ***                    ***
- * ***  ****  **********     ***        *****       ***  ****          *****
- * *********  **********     ***      *********     ************     *********
- * ****         ***          ***              ***   ***       ****   ***
- * ***          ***  ******  ***      ***********   ***        ****   *****
- * ***          ***  ******  ***    *************   ***        ****      *****
- * ***          ****         ****   ***       ***   ***       ****          ***
- * ***           *******      ***** **************  *************    *********
- * ***             *****        ***   *******   **  **  ******         *****
- *                           t h e  r e a l t i m e  t a r g e t  e x p e r t s
- *
- * http://www.rt-labs.com
- * Copyright (C) 2009. rt-labs AB, Sweden. All rights reserved.
- *------------------------------------------------------------------------------
- * $Id: oshw.c 411 2012-12-02 20:16:39Z rtlaka $
- *------------------------------------------------------------------------------
+/*
+ * Licensed under the GNU General Public License version 2 with exceptions. See
+ * LICENSE file in the project root for full license information
  */
 
 #include "oshw.h"
@@ -65,7 +50,7 @@ ec_adaptert * oshw_find_adapters (void)
       fprintf(stderr,"Error in pcap_findalldevs_ex: %s\n", errbuf);
       return (NULL);
    }
-   /* Iterate all devices and create a local copy holding the name and 
+   /* Iterate all devices and create a local copy holding the name and
     * decsription.
     */
    for(d= alldevs; d != NULL; d= d->next)
@@ -94,10 +79,10 @@ ec_adaptert * oshw_find_adapters (void)
             string_len = EC_MAXLEN_ADAPTERNAME - 1;
          }
          strncpy(adapter->name, d->name,string_len);
-         adapter->name[string_len] = '\0'; 
+         adapter->name[string_len] = '\0';
       }
       else
-      { 
+      {
          adapter->name[0] = '\0';
       }
       if (d->description)
@@ -108,23 +93,23 @@ ec_adaptert * oshw_find_adapters (void)
             string_len = EC_MAXLEN_ADAPTERNAME - 1;
          }
          strncpy(adapter->desc, d->description,string_len);
-         adapter->desc[string_len] = '\0'; 
+         adapter->desc[string_len] = '\0';
       }
       else
       {
-          adapter->desc[0] = '\0'; 
+          adapter->desc[0] = '\0';
       }
       prev_adapter = adapter;
       i++;
    }
    /* free all devices allocated */
-   pcap_freealldevs(alldevs);   
+   pcap_freealldevs(alldevs);
 
    return ret_adapter;
 }
 
 /** Free memory allocated memory used by adapter collection.
- * @param[in] adapter = First element in linked list of adapters 
+ * @param[in] adapter = First element in linked list of adapters
  * EC_NOFRAME.
  */
 void oshw_free_adapters (ec_adaptert * adapter)
@@ -132,7 +117,7 @@ void oshw_free_adapters (ec_adaptert * adapter)
    ec_adaptert * next_adapter;
    /* Iterate the linked list and free all elemnts holding
     * adapter information
-    */ 
+    */
    if(adapter)
    {
       next_adapter = adapter->next;

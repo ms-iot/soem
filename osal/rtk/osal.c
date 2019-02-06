@@ -1,21 +1,6 @@
-/******************************************************************************
- *                *          ***                    ***
- *              ***          ***                    ***
- * ***  ****  **********     ***        *****       ***  ****          *****
- * *********  **********     ***      *********     ************     *********
- * ****         ***          ***              ***   ***       ****   ***
- * ***          ***  ******  ***      ***********   ***        ****   *****
- * ***          ***  ******  ***    *************   ***        ****      *****
- * ***          ****         ****   ***       ***   ***       ****          ***
- * ***           *******      ***** **************  *************    *********
- * ***             *****        ***   *******   **  **  ******         *****
- *                           t h e  r e a l t i m e  t a r g e t  e x p e r t s
- *
- * http://www.rt-labs.com
- * Copyright (C) 2009. rt-labs AB, Sweden. All rights reserved.
- *------------------------------------------------------------------------------
- * $Id: osal.c 452 2013-02-26 21:02:58Z smf.arthur $
- *------------------------------------------------------------------------------
+/*
+ * Licensed under the GNU General Public License version 2 with exceptions. See
+ * LICENSE file in the project root for full license information
  */
 
 #include <osal.h>
@@ -129,3 +114,32 @@ boolean osal_timer_is_expired (osal_timert * self)
    return is_not_yet_expired == false;
 }
 
+void *osal_malloc(size_t size)
+{
+   return malloc(size);
+}
+
+void osal_free(void *ptr)
+{
+   free(ptr);
+}
+
+int osal_thread_create(void *thandle, int stacksize, void *func, void *param)
+{
+   thandle = task_spawn ("worker", func, 6,stacksize, param);
+   if(!thandle)
+   {
+      return 0;
+   }
+   return 1;
+}
+
+int osal_thread_create_rt(void *thandle, int stacksize, void *func, void *param)
+{
+   thandle = task_spawn ("worker_rt", func, 15 ,stacksize, param);
+   if(!thandle)
+   {
+      return 0;
+   }
+   return 1;
+}
